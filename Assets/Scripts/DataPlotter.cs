@@ -44,8 +44,5 @@ public class DataPlotter : MonoBehaviour
             // Gets material color and sets it to a new RGBA color we define
             dataPoint.GetComponent<Renderer>().material.color = new Color(x, y, z, 1.0f);
         }
-
-        // Instantiate(pointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-
     }
 }
