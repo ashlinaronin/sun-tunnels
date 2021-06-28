@@ -16,8 +16,7 @@ public class DataPlotterAnimated : MonoBehaviour
     private Vector3[] accelerationPoints;
     private GameObject magnetObject;
     private GameObject accelObject;
-
-    private int animationIndex = 0;
+    public float animationSpeed = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -44,11 +43,14 @@ public class DataPlotterAnimated : MonoBehaviour
         magnetObject = Instantiate(pointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         magnetObject.transform.parent = pointContainer.transform;
         magnetObject.transform.name = "MagneticFieldStrength";
+        magnetObject.GetComponent<Renderer>().material.color =  Color.green;
 
         // this will hold accel animation
         accelObject = Instantiate(pointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         accelObject.transform.parent = pointContainer.transform;
-        accelObject.transform.name = "Accel";
+        accelObject.transform.name = "Accel";        
+        accelObject.GetComponent<Renderer>().material.color =  Color.blue;
+
 
         for (var i = 0; i < pointList.Count; i++)
         {
@@ -67,11 +69,20 @@ public class DataPlotterAnimated : MonoBehaviour
 
     void Update()
     {
-        // update position of magnet and accel objects based on next Vector3 in array
-        magnetObject.transform.localPosition = magnetPoints[animationIndex];
-        accelObject.transform.localPosition = accelerationPoints[animationIndex];
+        // increment animationIndex based on Time.fixedTime, looping at end of array
+        int animationIndex = Mathf.RoundToInt(animationSpeed * Time.fixedTime) % (pointList.Count - 1);
+       
+        Vector3 desiredMagnetPosition = magnetPoints[animationIndex];
+        Vector3 desiredAccelPosition = accelerationPoints[animationIndex];
 
-        // increment animationIndex, looping at end of array
-        animationIndex = (animationIndex + 1) % (pointList.Count - 1);
+        Vector3 interpolatedMagnetPosition = Vector3.Lerp(magnetObject.transform.position, desiredMagnetPosition, Time.deltaTime);
+        Vector3 interpolatedAccelPosition = Vector3.Lerp(accelObject.transform.position, desiredAccelPosition, Time.deltaTime);
+
+        Debug.Log($"Desiredmag: {desiredMagnetPosition}, interpolatedmag: {interpolatedMagnetPosition}");
+        Debug.Log($"Desiredaccel: {desiredAccelPosition}, interpolatedaccel: {interpolatedAccelPosition}");
+
+        // lerp towards desired positions
+        magnetObject.transform.localPosition = interpolatedMagnetPosition;
+        accelObject.transform.localPosition = interpolatedAccelPosition;
     }
 }

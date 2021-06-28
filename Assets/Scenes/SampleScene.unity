@@ -265,6 +265,7 @@ MonoBehaviour:
   pointPrefab: {fileID: 2022909543989544471, guid: 70625d54193904d0eb556bbfe9d7dd22, type: 3}
   pointContainer: {fileID: 60628803}
   plotScale: 10
+  animationSpeed: 15
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0
