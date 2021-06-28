@@ -7,6 +7,7 @@ public class DataPlotterAnimated : MonoBehaviour
     public string inputFile;
     public GameObject pointPrefab;
     public GameObject pointContainer;
+    public GameObject particleTail;
 
     public float plotScale = 10;
 
@@ -44,6 +45,9 @@ public class DataPlotterAnimated : MonoBehaviour
         magnetObject.transform.parent = pointContainer.transform;
         magnetObject.transform.name = "MagneticFieldStrength";
         magnetObject.GetComponent<Renderer>().material.color =  Color.green;
+
+        // add particle tail as child of magnet obj
+        particleTail.transform.parent = magnetObject.transform;
 
         // this will hold accel animation
         accelObject = Instantiate(pointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
