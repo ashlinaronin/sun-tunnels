@@ -39,6 +39,10 @@ public class DataPlotterAnimated : MonoBehaviour
         magnetPoints = new Vector3[pointList.Count];
         accelerationPoints = new Vector3[pointList.Count];
 
+        // make a copy of the particle tail so we can use it for the 2nd object
+        var accelParticleTail = Instantiate(particleTail, new Vector3(0, 0, 0), Quaternion.identity);
+
+
         // create new data point object and parent it to point container
         // this will hold magnet animation
         magnetObject = Instantiate(pointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
@@ -46,7 +50,7 @@ public class DataPlotterAnimated : MonoBehaviour
         magnetObject.transform.name = "MagneticFieldStrength";
         magnetObject.GetComponent<Renderer>().material.color =  Color.green;
 
-        // add particle tail as child of magnet obj
+        // add 1st particle tail as child of magnet obj
         particleTail.transform.parent = magnetObject.transform;
 
         // this will hold accel animation
@@ -55,6 +59,8 @@ public class DataPlotterAnimated : MonoBehaviour
         accelObject.transform.name = "Accel";        
         accelObject.GetComponent<Renderer>().material.color =  Color.blue;
 
+        // add particle tail copy as child of accel obj
+        accelParticleTail.transform.parent = accelObject.transform;
 
         for (var i = 0; i < pointList.Count; i++)
         {
