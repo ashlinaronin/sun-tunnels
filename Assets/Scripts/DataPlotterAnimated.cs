@@ -9,7 +9,8 @@ public class DataPlotterAnimated : MonoBehaviour
     public GameObject pointContainer;
     public GameObject particleTail;
 
-    public float plotScale = 10;
+    public float magnetScale = 10;
+    public float accelScale = 1;
 
     private List<Dictionary<string,object>> pointList;
 
@@ -65,12 +66,13 @@ public class DataPlotterAnimated : MonoBehaviour
         for (var i = 0; i < pointList.Count; i++)
         {
             // Get value in pointList at ith "row", in "column" Name
-            float magnetX = System.Convert.ToSingle(pointList[i]["MagnetX"]);
-            float magnetY = System.Convert.ToSingle(pointList[i]["MagnetY"]);
-            float magnetZ = System.Convert.ToSingle(pointList[i]["MagnetZ"]);
-            float accelerationX = System.Convert.ToSingle(pointList[i]["AccelX"]);
-            float accelerationY = System.Convert.ToSingle(pointList[i]["AccelY"]);
-            float accelerationZ = System.Convert.ToSingle(pointList[i]["AccelZ"]);
+            // note that scale is only applied to the magnets for now
+            float magnetX = System.Convert.ToSingle(pointList[i]["MagnetX"]) * magnetScale;
+            float magnetY = System.Convert.ToSingle(pointList[i]["MagnetY"]) * magnetScale;
+            float magnetZ = System.Convert.ToSingle(pointList[i]["MagnetZ"]) * magnetScale;
+            float accelerationX = System.Convert.ToSingle(pointList[i]["AccelX"]) * accelScale;
+            float accelerationY = System.Convert.ToSingle(pointList[i]["AccelY"]) * accelScale;
+            float accelerationZ = System.Convert.ToSingle(pointList[i]["AccelZ"]) * accelScale;
 
             magnetPoints[i] = new Vector3(magnetX, magnetY, magnetZ);
             accelerationPoints[i] = new Vector3(accelerationX, accelerationY, accelerationZ);
