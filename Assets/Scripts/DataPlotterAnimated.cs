@@ -49,7 +49,7 @@ public class DataPlotterAnimated : MonoBehaviour
         magnetObject = Instantiate(pointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         magnetObject.transform.parent = pointContainer.transform;
         magnetObject.transform.name = "MagneticFieldStrength";
-        magnetObject.GetComponent<Renderer>().material.color =  Color.green;
+        // magnetObject.GetComponent<Renderer>().material.color =  Color.green;
 
         // add 1st particle tail as child of magnet obj
         particleTail.transform.parent = magnetObject.transform;
@@ -58,7 +58,7 @@ public class DataPlotterAnimated : MonoBehaviour
         accelObject = Instantiate(pointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         accelObject.transform.parent = pointContainer.transform;
         accelObject.transform.name = "Accel";        
-        accelObject.GetComponent<Renderer>().material.color =  Color.blue;
+        // accelObject.GetComponent<Renderer>().material.color =  Color.blue;
 
         // add particle tail copy as child of accel obj
         accelParticleTail.transform.parent = accelObject.transform;
