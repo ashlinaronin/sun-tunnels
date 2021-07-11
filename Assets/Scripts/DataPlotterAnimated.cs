@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class DataPlotterAnimated : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class DataPlotterAnimated : MonoBehaviour
     private GameObject magnetObject;
     private GameObject accelObject;
     public float animationSpeed = 2.0f;
+
+    public CinemachineVirtualCamera virtualCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +65,9 @@ public class DataPlotterAnimated : MonoBehaviour
 
         // add particle tail copy as child of accel obj
         accelParticleTail.transform.parent = accelObject.transform;
+
+        virtualCamera.LookAt = magnetObject.transform;
+        virtualCamera.Follow = magnetObject.transform;
 
         for (var i = 0; i < pointList.Count; i++)
         {
