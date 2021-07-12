@@ -1,15 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 
 public class DataPlotterAnimated : MonoBehaviour
 {
     public string inputFile;
-    public GameObject pointPrefab;
-    public GameObject pointContainer;
-    public GameObject particleTail;
-
     public float magnetScale = 10;
     public float accelScale = 1;
 
@@ -17,11 +12,9 @@ public class DataPlotterAnimated : MonoBehaviour
 
     private Vector3[] magnetPoints;
     private Vector3[] accelerationPoints;
-    private GameObject magnetObject;
-    private GameObject accelObject;
+    public GameObject magnetObject;
+    public GameObject accelObject;
     public float animationSpeed = 2.0f;
-
-    public CinemachineVirtualCamera virtualCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -42,32 +35,6 @@ public class DataPlotterAnimated : MonoBehaviour
 
         magnetPoints = new Vector3[pointList.Count];
         accelerationPoints = new Vector3[pointList.Count];
-
-        // make a copy of the particle tail so we can use it for the 2nd object
-        var accelParticleTail = Instantiate(particleTail, new Vector3(0, 0, 0), Quaternion.identity);
-
-
-        // create new data point object and parent it to point container
-        // this will hold magnet animation
-        magnetObject = Instantiate(pointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        magnetObject.transform.parent = pointContainer.transform;
-        magnetObject.transform.name = "MagneticFieldStrength";
-        // magnetObject.GetComponent<Renderer>().material.color =  Color.green;
-
-        // add 1st particle tail as child of magnet obj
-        particleTail.transform.parent = magnetObject.transform;
-
-        // this will hold accel animation
-        accelObject = Instantiate(pointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        accelObject.transform.parent = pointContainer.transform;
-        accelObject.transform.name = "Accel";        
-        // accelObject.GetComponent<Renderer>().material.color =  Color.blue;
-
-        // add particle tail copy as child of accel obj
-        accelParticleTail.transform.parent = accelObject.transform;
-
-        virtualCamera.LookAt = magnetObject.transform;
-        virtualCamera.Follow = magnetObject.transform;
 
         for (var i = 0; i < pointList.Count; i++)
         {
