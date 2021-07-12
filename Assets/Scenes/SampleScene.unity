@@ -315,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputFile: sensor_data
   magnetScale: 1000
-  accelScale: 1
+  accelScale: -10
   magnetObject: {fileID: 794529893}
   accelObject: {fileID: 170047815}
   animationSpeed: 8
