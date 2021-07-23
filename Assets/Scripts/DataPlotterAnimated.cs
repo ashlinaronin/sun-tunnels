@@ -20,18 +20,9 @@ public class DataPlotterAnimated : MonoBehaviour
     void Start()
     {
         pointList = CSVReader.Read(inputFile);
-        Debug.Log(pointList);
 
         // Declare list of strings, fill with keys (column names)
         List<string> columnList = new List<string>(pointList[1].Keys);
-        
-        // Print number of keys (using .count)
-        Debug.Log("There are " + columnList.Count + " columns in CSV");
-        
-        foreach (string key in columnList)
-        {
-            Debug.Log("Column name is " + key);
-        }
 
         magnetPoints = new Vector3[pointList.Count];
         accelerationPoints = new Vector3[pointList.Count];
@@ -63,8 +54,8 @@ public class DataPlotterAnimated : MonoBehaviour
         Vector3 interpolatedMagnetPosition = Vector3.Lerp(magnetObject.transform.position, desiredMagnetPosition, Time.deltaTime);
         Vector3 interpolatedAccelPosition = Vector3.Lerp(accelObject.transform.position, desiredAccelPosition, Time.deltaTime);
 
-        Debug.Log($"Desiredmag: {desiredMagnetPosition}, interpolatedmag: {interpolatedMagnetPosition}");
-        Debug.Log($"Desiredaccel: {desiredAccelPosition}, interpolatedaccel: {interpolatedAccelPosition}");
+        // Debug.Log($"Desiredmag: {desiredMagnetPosition}, interpolatedmag: {interpolatedMagnetPosition}");
+        // Debug.Log($"Desiredaccel: {desiredAccelPosition}, interpolatedaccel: {interpolatedAccelPosition}");
 
         // lerp towards desired positions
         magnetObject.transform.localPosition = interpolatedMagnetPosition;
